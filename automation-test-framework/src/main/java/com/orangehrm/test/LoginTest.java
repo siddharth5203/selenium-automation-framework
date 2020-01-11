@@ -40,6 +40,7 @@ public class LoginTest extends BaseSelenium{
 		lp.loginForInvalidCreadentials("admin1", "admin")
 			.verifySpanMsg("Invalid credentials");
 	
+		
 	}
 	
 	@Test
