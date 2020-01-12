@@ -1,8 +1,11 @@
 package com.orangehrm.pages;
 
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import com.orangehrm.comman.WebDriverFactory;
@@ -27,6 +30,14 @@ public class LoginPage {
 	@FindBy(id="footer")
 	WebElement ohrmLink;
 	
+	WebDriverWait wait = new WebDriverWait(WebDriverFactory.getWebDriver(), 30);
+	
+	public LoginPage isLoginPageLoaded() {
+		wait.until(ExpectedConditions.elementToBeClickable(userName));
+		wait.until(ExpectedConditions.elementToBeClickable(passWord));
+		wait.until(ExpectedConditions.elementToBeClickable(loginButton));
+		return this;
+	}
 	public LoginPage() {
 		PageFactory.initElements(WebDriverFactory.getWebDriver(), this);
 	}
@@ -34,7 +45,7 @@ public class LoginPage {
 		userName.sendKeys(uname);
 		passWord.sendKeys(pword);
 		loginButton.click();
-		return (new HomePage());
+		return (new HomePage().isHomePageLoaded());
 	}
 	
 	public LoginPage loginForInvalidCreadentials(String uname, String pword) {
@@ -51,7 +62,7 @@ public class LoginPage {
 	
 	public LoginPage verifySpanMsg(String smtxt) {
 		Assert.assertEquals(spanMSG.getText(), smtxt);	
-		return (new LoginPage());
+		return (new LoginPage().isLoginPageLoaded());
 	}
 	
 	public void verifyLink() {
