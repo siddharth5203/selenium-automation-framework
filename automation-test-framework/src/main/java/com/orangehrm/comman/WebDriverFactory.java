@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 
 public class WebDriverFactory {
 
-	private static ThreadLocal<WebDriver> threadLocalStorage = new ThreadLocal<>();
+	private static ThreadLocal<WebDriver> threadLocalStorage = new ThreadLocal<WebDriver>();
 
 	protected static void setWebDriver(WebDriver dr) {
 		threadLocalStorage.set(dr);
