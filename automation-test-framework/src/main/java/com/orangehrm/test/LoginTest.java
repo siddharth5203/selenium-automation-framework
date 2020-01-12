@@ -17,8 +17,10 @@ public class LoginTest extends BaseSelenium{
 	{
 			
 		LoginPage lp = new LoginPage();
-		lp.login("admin", "admin")
-			.verifyWelComeText("Welcome Admin");
+		lp.isLoginPageLoaded()
+			.login("admin", "admin")
+				.isHomePageLoaded()
+					.verifyWelComeText("Welcome Admin");
 		
 	}
 		
@@ -27,8 +29,10 @@ public class LoginTest extends BaseSelenium{
 	{
 		
 		LoginPage lp = new LoginPage();
-		lp.loginForInvalidCreadentials("admin", "admin1")
-			.verifySpanMsg("Invalid credentials");
+		lp.isLoginPageLoaded()
+				.loginForInvalidCreadentials("admin", "admin1")
+					.isLoginPageLoaded()
+						.verifySpanMsg("Invalid credentials");
 	
 	}
 	
@@ -40,7 +44,6 @@ public class LoginTest extends BaseSelenium{
 		lp.loginForInvalidCreadentials("admin1", "admin")
 			.verifySpanMsg("Invalid credentials");
 	
-		
 	}
 	
 	@Test
