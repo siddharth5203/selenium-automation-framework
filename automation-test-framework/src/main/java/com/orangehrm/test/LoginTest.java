@@ -1,4 +1,7 @@
 package com.orangehrm.test;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
+import org.testng.annotations.DataProvider;
 //import org.openqa.selenium.By;
 //import org.openqa.selenium.WebDriver;
 //import org.openqa.selenium.WebElement;
@@ -6,24 +9,26 @@ package com.orangehrm.test;
 import org.testng.annotations.Test;
 
 import com.orangehrm.comman.BaseSelenium;
+import com.orangehrm.comman.WebDriverFactory;
 //import com.orangehrm.comman.WebDriverFactory;
 //import com.orangehrm.pages.HomePage;
 import com.orangehrm.pages.LoginPage;
 
 public class LoginTest extends BaseSelenium{
 		
-	@Test
-	public void validUNamenPWord()
-	{
-			
+	@Test(dataProvider="excelData", groups= {"LoginGroup"})
+	public void validUNamenPWord(String userName, String passWord, String welcomeText)
+	{ 	
 		LoginPage lp = new LoginPage();
-		lp.isLoginPageLoaded()
-			.login("admin", "admin")
-				.isHomePageLoaded()
-					.verifyWelComeText("Welcome Admin");
+		//Actions action =new Actions(WebDriverFactory.getWebDriver());
+		//action.click().build().perform();  //without build n perform action will not work
+		//.isLoginPageLoaded()
+		lp.login(userName, passWord)
+			//	.isHomePageLoaded()
+					.verifyWelComeText(welcomeText);
 		
 	}
-		
+	/*	
 	@Test
 	public void verifyInvalidPWord()
 	{
@@ -84,5 +89,5 @@ public class LoginTest extends BaseSelenium{
 		lp.loginForInvalidCreadentials("", "")
 			.verifySpanMsg("Username cannot be empty");
 	
-	}
+	}*/
 }

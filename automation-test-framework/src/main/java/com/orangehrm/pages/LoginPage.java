@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import com.orangehrm.comman.ExtentReportTestFactory;
 import com.orangehrm.comman.WebDriverFactory;
 
 public class LoginPage {
@@ -31,17 +32,20 @@ public class LoginPage {
 	WebElement ohrmLink;
 	
 	WebDriverWait wait = new WebDriverWait(WebDriverFactory.getWebDriver(), 30);
-	
 	public LoginPage isLoginPageLoaded() {
+
 		wait.until(ExpectedConditions.elementToBeClickable(userName));
 		wait.until(ExpectedConditions.elementToBeClickable(passWord));
 		wait.until(ExpectedConditions.elementToBeClickable(loginButton));
+		ExtentReportTestFactory.getTest().info("In login method");
 		return this;
 	}
 	public LoginPage() {
 		PageFactory.initElements(WebDriverFactory.getWebDriver(), this);
 	}
 	public HomePage login(String uname, String pword) {
+		ExtentReportTestFactory.getTest().info("In login method");
+
 		userName.sendKeys(uname);
 		passWord.sendKeys(pword);
 		loginButton.click();
